@@ -9,16 +9,32 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', ['CharactersApi', function(charactersApi) {
+.controller('View1Ctrl', ['CharactersApi', '$scope', '$location', function(charactersApi, $scope, $location) {
 
-  teste();
+  $scope.title = 'teste!';
 
-  function teste() {
-    
-    charactersApi.getAll().then(response => {
-                console.log(response)
-            });
+  init();
 
+  function init() {
+    getList();
   };
+
+  function getList() {
+
+    charactersApi.getAll().then(response => {
+      $scope.list = response.data.results;
+      console.log(response);
+      console.log($scope.title);
+      $scope.$apply();
+    });
+
+  }
+
+  $scope.onClick = function(heroId) {
+
+
+    $location.path('/view2/' + heroId);
+
+  }
 
 }]);

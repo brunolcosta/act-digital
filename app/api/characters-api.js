@@ -5,29 +5,6 @@ angular.module('myApp.api', [])
         const privateKey = '37eb33ea5cf75d6bfb41243eb795de2a6a568d1c';
         const publicKey = 'c3cd26538a256d90acce10d36735035a';
 
-        function request(url, params, method) {
-
-            let options = {
-                method
-            };
-        
-            if (method === 'GET') {
-                url += '?' + (new URLSearchParams(params)).toString();
-            }
-            else {
-                options.body = JSON.stringify(params);
-            }
-        
-            return fetch(url, options)
-                .then(response => response.json());
-        }
-
-        function get(endpointRequest, params) {
-
-            let url = apiURL + endpointRequest;
-            return request(url, params, 'GET');
-        }
-
         let getAll = function () {
 
             apiService.urlAPI = apiURL;
