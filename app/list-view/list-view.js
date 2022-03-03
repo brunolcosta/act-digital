@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.listView', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {
-    templateUrl: 'view1/view1.html',
-    controller: 'View1Ctrl'
+  $routeProvider.when('/list', {
+    templateUrl: 'list-view/list-view.html',
+    controller: 'ListViewCtrl'
   });
 }])
 
-.controller('View1Ctrl', ['CharactersApi', '$scope', '$location', function(charactersApi, $scope, $location) {
+.controller('ListViewCtrl', ['CharactersApi', '$scope', '$location', function(charactersApi, $scope, $location) {
 
   $scope.title = 'teste!';
 
@@ -33,7 +33,7 @@ angular.module('myApp.view1', ['ngRoute'])
   $scope.onClick = function(heroId) {
 
 
-    $location.path('/view2/' + heroId);
+    $location.path('/detail/' + heroId);
 
   }
 
