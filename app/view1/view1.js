@@ -14,7 +14,11 @@ angular.module('myApp.view1', ['ngRoute'])
   teste();
 
   function teste() {
-    charactersApi.getHash();
+    
+    charactersApi.getAll().then(response => {
+                console.log(response)
+            });
+
   };
 
 }]);

@@ -1,38 +1,63 @@
 angular.module('myApp.api', [])
-    .factory('CharactersApi', function() {
+    .factory('CharactersApi', ['md5', 'apiService', function(md5, apiService) {
 
         const apiURL = 'https://gateway.marvel.com/';
+        const privateKey = '37eb33ea5cf75d6bfb41243eb795de2a6a568d1c';
+        const publicKey = 'c3cd26538a256d90acce10d36735035a';
 
-        let get = function (sunLightValue, waterValue, petsValue) {
+        function request(url, params, method) {
 
-            const endpointRequest = '/v1/public/characters';
-
-
-
-            let params = [
-                ['apikey', sunLightValue],
-                ['hash', waterValue],
-                ['ts', petsValue]
-            ];
-
-            //return super.get(endpointRequest, params);
+            let options = {
+                method
+            };
+        
+            if (method === 'GET') {
+                url += '?' + (new URLSearchParams(params)).toString();
+            }
+            else {
+                options.body = JSON.stringify(params);
+            }
+        
+            return fetch(url, options)
+                .then(response => response.json());
         }
 
-        let getHash = function () {
+        function get(endpointRequest, params) {
 
-            let ts = Date.now;
+            let url = apiURL + endpointRequest;
+            return request(url, params, 'GET');
+        }
 
-            let privateKey = '5a237863b3cc2061003cbbc4fe20dc06';
-            let publicKey = 'fbf255068eccea6d0ef951b9f25626b57ab2fe72';
+        let getAll = function () {
 
-            //console.log(MD5(ts + privateKey + publicKey));
-            console.log('teste');
+            apiService.urlAPI = apiURL;
+            
+            const endpointRequest = '/v1/public/characters';
+
+            let timeStamp = Date.now();
+
+            let params = [
+                ['apikey', publicKey],
+                ['hash', getHash(timeStamp)],
+                ['ts', timeStamp]
+            ];
+
+            return apiService.get(endpointRequest, params);
+        }
+
+        let getHash = function (timeStamp) {
+
+            let hash = md5.createHash(timeStamp + privateKey + publicKey).toString();
+            
+            console.log(hash);
+            return hash;
 
         }
 
         return {
-            getHash: getHash
+            getHash: getHash,
+            getAll: getAll
         };
 
-    });
+    }]);
 

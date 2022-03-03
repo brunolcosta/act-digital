@@ -8,7 +8,9 @@
   "dependencies": {
     "angular": "^1.7.5",
     "angular-loader": "^1.7.5",
+    "angular-md5": "^0.1.10",
     "angular-route": "^1.7.5",
+    "crypto-js": "^4.1.1",
     "html5-boilerplate": "0.0.1"
   },
   "devDependencies": {
