@@ -1,5 +1,29 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div ng-controller="DetailViewCtrl">
+
+  <figure class="figure">
+    <img src="{{getImageURL()}}" class="figure-img img-fluid rounded" alt="...">
+    <figcaption class="figure-caption">{{heroDetails.name}} picture!</figcaption>
+  </figure>
+
+  <h2>{{heroDetails.name}}</h2>
+  <p>Last modified {{heroDetails.modified}}</p>
+  <h5>{{heroDetails.description}}</h5>
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <button type="button" class="nav-link active" aria-current="page">Series</button>
+      <p>teste</p>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="nav-link" href="#">Stories</button>
+      <p>teste 222</p>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Events</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled">URLs</a>
+    </li>
+  </ul>
+
+</div>

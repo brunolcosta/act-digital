@@ -6,6 +6,7 @@
   "repository": "https://github.com/angular/angular-seed",
   "license": "MIT",
   "dependencies": {
+    "@popperjs/core": "^2.11.2",
     "angular": "^1.7.5",
     "angular-loader": "^1.7.5",
     "angular-md5": "^0.1.10",

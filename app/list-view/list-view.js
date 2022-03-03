@@ -11,8 +11,6 @@ angular.module('myApp.listView', ['ngRoute'])
 
 .controller('ListViewCtrl', ['CharactersApi', '$scope', '$location', function(charactersApi, $scope, $location) {
 
-  $scope.title = 'teste!';
-
   init();
 
   function init() {
@@ -32,9 +30,14 @@ angular.module('myApp.listView', ['ngRoute'])
 
   $scope.onClick = function(heroId) {
 
-
     $location.path('/detail/' + heroId);
 
+  }
+
+  $scope.getImageURL = function(heroData) {
+    if (heroData) {
+      return heroData.thumbnail.path + '.' + heroData.thumbnail.extension;
+    }
   }
 
 }]);
