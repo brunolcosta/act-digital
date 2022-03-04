@@ -1,4 +1,4 @@
-<div ng-controller="ListViewCtrl" class="container">
+<div ng-controller="ListViewCtrl" class="container" ng-if="list">
 
     <div class="row row-cols-1 row-cols-md-4">
 
@@ -7,13 +7,32 @@
                 <img src="{{getImageURL(item)}}" class="card-img-top h-50" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{item.name}}</h5>
-                    <p class="card-text" ng-if="item.description.length">{{item.description | limitTo : 100}} ...</p>
+                    <p class="card-text" ng-if="item.description.length">{{item.description | limitTo : 200}} ...</p>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-primary float-end" ng-click="onClick(item.id)">Details</button>
+                    <button type="button" class="btn btn-info float-end" ng-click="onClick(item.id)">Details</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="container">
+    <div class="row">
+    <nav aria-label="Page navigation example" class="col">
+        <ul class="pagination">
+            <li class="page-item">
+                <button type="button" class="page-link" ng-click="goPreviousPage()" >Previous</button>
+            </li>
+            <li class="page-item">
+                <input type="number" class="form-control" ng-model="currentPage" ng-change="onChangePage()" min="1" max="{{totalPages}}" required>
+            </li>
+            <li class="page-item">
+                <button type="button" class="page-link" ng-click="goNextPage()" >Next</button>
+            </li>
+        </ul>
+    </nav>
+    <label class="col-6">({{currentPage}} of {{totalPages}} pages)</label>
+</div>
+</div>
 
 </div>

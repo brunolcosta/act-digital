@@ -7,7 +7,7 @@ angular.module('myApp.api', [])
 
         apiService.urlAPI = apiURL;
 
-        let getAll = function () {
+        let getAll = function (offset) {
 
             const endpointRequest = '/v1/public/characters';
 
@@ -16,7 +16,8 @@ angular.module('myApp.api', [])
             let params = [
                 ['apikey', publicKey],
                 ['hash', getHash(timeStamp)],
-                ['ts', timeStamp]
+                ['ts', timeStamp],
+                ['offset', offset]
             ];
 
             return apiService.get(endpointRequest, params);

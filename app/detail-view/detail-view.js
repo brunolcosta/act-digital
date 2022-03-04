@@ -39,4 +39,8 @@ angular.module('myApp.detailView', ['ngRoute'])
     
   }
 
+  $scope.backHistory = function() {
+    history.back();
+  }
+
 }]);

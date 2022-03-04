@@ -14,17 +14,67 @@ angular.module('myApp.listView', ['ngRoute'])
   init();
 
   function init() {
+    
+    $scope.currentPage = 1;
+
     getList();
+
   };
 
   function getList() {
 
-    charactersApi.getAll().then(response => {
+    let offset = ($scope.currentPage - 1) * 20;
+
+    charactersApi.getAll(offset).then(response => {
+
       $scope.list = response.data.results;
       console.log(response);
-      console.log($scope.title);
+
+      $scope.totalItems = response.data.total;
+
+      if ($scope.currentPage != $scope.totalPages) {
+        $scope.totalPages = Math.ceil(response.data.total / response.data.count);
+      }
+      
       $scope.$apply();
+
     });
+
+  }
+
+  $scope.goPreviousPage = function() {
+    
+    if ($scope.currentPage > 1) {
+      $scope.currentPage--;
+      getList();
+    }
+    
+  }
+
+  $scope.goNextPage = function() {
+    
+    if ($scope.currentPage <= $scope.totalPages) {
+      $scope.currentPage++;
+      getList();
+    }
+    
+  }
+
+  $scope.onChangePage = function() {
+    
+    getList();
+
+  }
+
+  $scope.getPages = function() {
+
+    let pages = [];
+
+    for(let i=1; i <= $scope.totalPages; i++) {
+      pages.push(i);
+    }
+
+    return pages;
 
   }
 
