@@ -1,29 +1,76 @@
-<div ng-controller="DetailViewCtrl">
+<div ng-controller="DetailViewCtrl" ng-if="heroDetails">
 
-  <figure class="figure">
-    <img src="{{getImageURL()}}" class="figure-img img-fluid rounded" alt="...">
-    <figcaption class="figure-caption">{{heroDetails.name}} picture!</figcaption>
-  </figure>
+  <div class="container-fluid">
+    <div class="row">
+      <figure class="figure col">
+        <img src="{{getImageURL()}}" class="figure-img img-fluid rounded" alt="...">
+        <figcaption class="figure-caption">{{heroDetails.name}} picture!</figcaption>
+      </figure>
+      <div class="col">
+        <h2>{{heroDetails.name}}</h2>
+        <h5>{{heroDetails.description}}</h5>
+        <p>Last modified {{heroDetails.modified}}</p>
+      </div>
+    </div>
+  </div>
 
-  <h2>{{heroDetails.name}}</h2>
-  <p>Last modified {{heroDetails.modified}}</p>
-  <h5>{{heroDetails.description}}</h5>
-
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <button type="button" class="nav-link active" aria-current="page">Series</button>
-      <p>teste</p>
-    </li>
-    <li class="nav-item">
-      <button type="button" class="nav-link" href="#">Stories</button>
-      <p>teste 222</p>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Events</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled">URLs</a>
-    </li>
-  </ul>
+  <div class="accordion" id="accordionDetails">
+    <div class="accordion-item" ng-if="heroDetails.series.items.length > 0">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeries" aria-expanded="true" aria-controls="collapseSeries">
+          Series
+        </button>
+      </h2>
+      <div id="collapseSeries" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionDetails">
+        <div class="accordion-body">
+          <div ng-repeat="serie in heroDetails.series.items">
+            <p>{{serie.name}}</p>
+          </div>          
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item" ng-if="heroDetails.stories.items.length > 0">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStories" aria-expanded="false" aria-controls="collapseStories">
+          Stories
+        </button>
+      </h2>
+      <div id="collapseStories" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionDetails">
+        <div class="accordion-body">
+          <div ng-repeat="story in heroDetails.stories.items">
+            <p>{{story.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item" ng-if="heroDetails.events.items.length > 0">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEvents" aria-expanded="false" aria-controls="collapseEvents">
+          Events
+        </button>
+      </h2>
+      <div id="collapseEvents" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionDetails">
+        <div class="accordion-body">
+          <div ng-repeat="event in heroDetails.events.items">
+            <p>{{event.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item" ng-if="heroDetails.urls.length > 0">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseURLs" aria-expanded="false" aria-controls="collapseURLs">
+          URLs
+        </button>
+      </h2>
+      <div id="collapseURLs" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionDetails">
+        <div class="accordion-body">
+          <div ng-repeat="link in heroDetails.urls">
+            <a href="{{link.url}}" target="_blank">{{link.type}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>

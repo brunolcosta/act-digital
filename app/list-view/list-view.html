@@ -1,13 +1,16 @@
-<div ng-controller="ListViewCtrl">
+<div ng-controller="ListViewCtrl" class="container">
 
     <div class="row row-cols-1 row-cols-md-4">
-        <div ng-repeat="item in list">
-            <div class="card" style="width: 18rem;">
-                <img src="{{getImageURL(item)}}" class="card-img-top" alt="...">
+
+        <div class="mb-3" ng-repeat="item in list">
+            <div class="card h-100">
+                <img src="{{getImageURL(item)}}" class="card-img-top h-50" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{item.name}}</h5>
-                    <p class="card-text">{{item.description | limitTo : 100}} ...</p>
-                    <button type="button" href="#" class="btn btn-primary" ng-click="onClick(item.id)">Details</button>
+                    <p class="card-text" ng-if="item.description.length">{{item.description | limitTo : 100}} ...</p>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary float-end" ng-click="onClick(item.id)">Details</button>
                 </div>
             </div>
         </div>
