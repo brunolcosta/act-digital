@@ -2,11 +2,11 @@
 
   <div class="container-fluid">
     <div class="row">
-      <figure class="figure col">
+      <figure class="figure col-xm-12 col-sm-12 col-md-6 col-lg-6">
         <img src="{{getImageURL()}}" class="figure-img img-fluid rounded" alt="...">
         <figcaption class="figure-caption">{{heroDetails.name}} picture!</figcaption>
       </figure>
-      <div class="col">
+      <div class="col-xm-12 col-sm-12 col-md-6 col-lg-6">
         <h2>{{heroDetails.name}}</h2>
         <h5>{{heroDetails.description}}</h5>
         <p>Last modified {{heroDetails.modified}}</p>
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="accordion" id="accordionDetails">
+  <div class="accordion mt-3" id="accordionDetails">
     <div class="accordion-item" ng-if="heroDetails.series.items.length > 0">
       <h2 class="accordion-header" id="headingOne">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeries" aria-expanded="true" aria-controls="collapseSeries">
